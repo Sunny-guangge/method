@@ -60,3 +60,11 @@ pod 'XMPPFramework', '~> 3.6.5'（例子）
 然后开始下载输入：
 pod install --verbose --no-repo-update
 
+使用加参数的命令：
+pod install –verbose –no-repo-update
+或者
+pod update –verbose –no-repo-update
+
+
+
+
