@@ -66,5 +66,31 @@ pod install –verbose –no-repo-update
 pod update –verbose –no-repo-update
 
 
+6、设置行间距、字间距
+//设置字间距
+UniChar characterSpacing = 3;
 
+NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:person];
+[attributedString removeAttribute:(id)kCTKernAttributeName range:NSMakeRange(0, attributedString.length)];
+CFNumberRef num =  CFNumberCreate(kCFAllocatorDefault,kCFNumberSInt8Type,&characterSpacing);
+[attributedString addAttribute:(id)kCTKernAttributeName value:(__bridge id)num range:NSMakeRange(0, attributedString.length)];
+CFRelease(num);
+
+//设置行间距
+UIFont *font = [UIFont systemFontOfSize:12];
+NSMutableParagraphStyle *paragraphStyle1 = [[NSMutableParagraphStyle alloc] init];
+paragraphStyle1.paragraphSpacing = 10;//段与段之间的距离
+paragraphStyle1.lineSpacing = 10;//行与行之间的距离
+paragraphStyle1.alignment = NSTextAlignmentLeft;//文字的显示方式：巨左、居中、居右
+paragraphStyle1.firstLineHeadIndent = 50.0;
+[attributedString addAttribute:NSParagraphStyleAttributeName value:paragraphStyle1 range:NSMakeRange(0, attributedString.length)];
+
+//设置字体大小（必须设置，否则计算出来的cell的高度不准确）
+[attributedString addAttribute:NSFontAttributeName value:font range:NSMakeRange(0, attributedString.length)];
+
+self.AttributedStringperson = attributedString;
+
+
+然后计算整个文字所占的位置大小：
+CGSize contentSize = [person.AttributedStringperson boundingRectWithSize:CGSizeMake(maxW, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading context:nil].size;
 
