@@ -94,3 +94,29 @@ self.AttributedStringperson = attributedString;
 然后计算整个文字所占的位置大小：
 CGSize contentSize = [person.AttributedStringperson boundingRectWithSize:CGSizeMake(maxW, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading context:nil].size;
 
+7、关于block的用法
+
+How Do I Declare A Block in Objective-C?
+
+1、As a local variable:
+
+returnType (^blockName)(parameterTypes) = ^returnType(parameters) {...};
+As a property:
+
+@property (nonatomic, copy) returnType (^blockName)(parameterTypes);
+As a method parameter:
+
+- (void)someMethodThatTakesABlock:(returnType (^)(parameterTypes))blockName;
+As an argument to a method call:
+
+[someObject someMethodThatTakesABlock:^returnType (parameters) {...}];
+2、As a typedef:
+
+typedef returnType (^TypeName)(parameterTypes);
+TypeName blockName = ^returnType(parameters) {...};
+This site is not intended to be an exhaustive list of all possible uses of blocks.
+If you find yourself needing syntax not listed here, it is likely that a typedef would make your code more readable.
+
+Unable to access this site due to the profanity in the URL? http://goshdarnblocksyntax.com is a more work-friendly mirror.
+
+
