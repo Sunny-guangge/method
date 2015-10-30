@@ -65,6 +65,7 @@ pod install –verbose –no-repo-update
 或者
 pod update –verbose –no-repo-update
 
+pod install --verbose --no-repo-update
 
 6、设置行间距、字间距
 //设置字间距
