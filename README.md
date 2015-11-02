@@ -121,3 +121,21 @@ If you find yourself needing syntax not listed here, it is likely that a typedef
 Unable to access this site due to the profanity in the URL? http://goshdarnblocksyntax.com is a more work-friendly mirror.
 
 
+8、设置tableview中个人信息页面分框之间的缝隙
+- (nullable UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
+{
+UITableViewHeaderFooterView *view = [tableView dequeueReusableHeaderFooterViewWithIdentifier:@"FotterView"];
+if (view == nil) {
+view = [[UITableViewHeaderFooterView alloc] initWithReuseIdentifier:@"FotterView"];
+[view setBackgroundView:[UIView new]];
+}
+return view;
+}
+
+- (CGFloat) tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
+{
+tableView.tableFooterView.backgroundColor = [UIColor redColor];
+
+return 20.0f;
+}
+第一组数据为空，作为顶部的空得部分
