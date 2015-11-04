@@ -139,3 +139,12 @@ tableView.tableFooterView.backgroundColor = [UIColor redColor];
 return 20.0f;
 }
 第一组数据为空，作为顶部的空得部分
+
+9、NSDictionary *infoDictionary = [[NSBundle mainBundle] infoDictionary];
+CFShow(infoDictionary);
+// app名称
+NSString *app_Name = [infoDictionary objectForKey:@"CFBundleDisplayName"];
+// app版本
+NSString *app_Version = [infoDictionary objectForKey:@"CFBundleShortVersionString"];
+// app build版本
+NSString *app_build = [infoDictionary objectForKey:@"CFBundleVersion"];
