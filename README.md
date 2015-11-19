@@ -148,3 +148,10 @@ NSString *app_Name = [infoDictionary objectForKey:@"CFBundleDisplayName"];
 NSString *app_Version = [infoDictionary objectForKey:@"CFBundleShortVersionString"];
 // app build版本
 NSString *app_build = [infoDictionary objectForKey:@"CFBundleVersion"];
+
+10、在iOS 7中，苹果引入了一个新的属性，叫做[UIViewController setEdgesForExtendedLayout:]，它的默认值为UIRectEdgeAll。当你的容器是navigation controller时，默认的布局将从navigation bar的顶部开始。这就是为什么所有的UI元素都往上漂移了44pt。
+修复这个问题的快速方法就是在方法- (void)viewDidLoad中添加如下一行代码：
+1
+self.edgesForExtendedLayout = UIRectEdgeNone;
+
+解决tableview在iOS7和iOS之上的frame的设置问题
