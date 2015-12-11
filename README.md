@@ -155,3 +155,20 @@ NSString *app_build = [infoDictionary objectForKey:@"CFBundleVersion"];
 self.edgesForExtendedLayout = UIRectEdgeNone;
 
 解决tableview在iOS7和iOS之上的frame的设置问题
+
+
+11、iPhone图片拉伸的方法：
+- (UIImage *)stretchableImageWithLeftCapWidth:(NSInteger)leftCapWidth topCapHeight:
+它的功能是创建一个内容可拉伸，而边角不拉伸的图片，需要两个参数，第一个是左边不拉伸区域的宽度，第二个参数是上面不拉伸的高度。
+根据设置的宽度和高度，将接下来的一个像素进行左右扩展和上下拉伸。
+注意：可拉伸的范围都是距离leftCapWidth后的1竖排像素，和距离topCapHeight后的1横排像素。
+参数的意义是，如果参数指定10，5。那么，图片左边10个像素，上边5个像素。不会被拉伸，x坐标为11和一个像素会被横向复制，y坐标为6的一个像素会被纵向复制。
+注意：只是对一个像素进行复制到一定宽度。而图像后面的剩余像素也不会被拉伸。
+- (UIImage *)resizableImageWithCapInsets:(UIEdgeInsets)capInsets resizingMode:(UIImageResizingMode)resizingMode NS_AVAILABLE_IOS(6_0);
+UIEdgeInsetsMake(28, 20, 15, 20)
+表示从距离左边28 上面20 右边15 下面20 进行拉伸
+其中Insets这个参数的格式是(top,left,bottom,right)，从上、左、下、右分别在图片上画了一道线，这样就给一个图片加了一个框。只有在框里面的部分才会被拉伸，而框外面的部分则不会改变。比如(20,5,10,5)，意思是下图矩形里面的部分可以被拉伸，而其余部分不变。
+
+
+
+
