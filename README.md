@@ -169,6 +169,90 @@ UIEdgeInsetsMake(28, 20, 15, 20)
 表示从距离左边28 上面20 右边15 下面20 进行拉伸
 其中Insets这个参数的格式是(top,left,bottom,right)，从上、左、下、右分别在图片上画了一道线，这样就给一个图片加了一个框。只有在框里面的部分才会被拉伸，而框外面的部分则不会改变。比如(20,5,10,5)，意思是下图矩形里面的部分可以被拉伸，而其余部分不变。
 
+12、NSCoping 编码 数据存储到本地 
+```python
+#import <Foundation/Foundation.h>
 
+@interface CKAccount : NSObject<NSCoding>
 
+/**　string	用于调用access_token，接口获取授权后的access token。*/
+@property (nonatomic, copy) NSString *access_token;
 
+/** 用户的头像链接*/
+@property (nonatomic,copy) NSString *avatar;
+
+/** 用户的名字*/
+@property (nonatomic,copy) NSString *name;
+
+/** 用户的Id*/
+@property (nonatomic,copy) NSString *Id;
+
+/** 用户的角色*/
+@property (nonatomic,copy) NSString *role; //0 游客用户   1 普通用户   2 专家用户
+
++ (instancetype)accountWithDict:(NSDictionary *)dict;
+
+@end
+
+```
+
+```python
+#import "CKAccount.h"
+
+@implementation CKAccount
+
++ (instancetype)accountWithDict:(NSDictionary *)dict
+{
+CKAccount *account = [[self alloc] init];
+account.access_token = dict[@"token"];
+account.Id = dict[@"id"];
+account.name = dict[@"name"];
+account.avatar = dict[@"avatar"];
+account.role = dict[@"role"];
+account.radarArray = dict[@"radar"];
+return account;
+}
+
+/**
+*  当一个对象要归档进沙盒中时，就会调用这个方法
+*  目的：在这个方法中说明这个对象的哪些属性要存进沙盒
+*/
+- (void)encodeWithCoder:(NSCoder *)encoder
+{
+[encoder encodeObject:self.access_token forKey:@"token"];
+[encoder encodeObject:self.Id forKey:@"id"];
+[encoder encodeObject:self.name forKey:@"name"];
+[encoder encodeObject:self.avatar forKey:@"avatar"];
+[encoder encodeObject:self.role forKey:@"role"];
+[encoder encodeObject:self.radarArray forKey:@"radar"];
+//    [encoder encodeInteger:self.role forKey:@"role"];
+}
+
+/**
+*  当从沙盒中解档一个对象时（从沙盒中加载一个对象时），就会调用这个方法
+*  目的：在这个方法中说明沙盒中的属性该怎么解析（需要取出哪些属性）
+*/
+- (id)initWithCoder:(NSCoder *)decoder
+{
+if (self = [super init]) {
+self.access_token = [decoder decodeObjectForKey:@"token"];
+self.Id = [decoder decodeObjectForKey:@"id"];
+self.role = [decoder decodeObjectForKey:@"role"];
+//        self.role = [decoder decodeIntegerForKey:@"role"];
+self.name = [decoder decodeObjectForKey:@"name"];
+self.avatar = [decoder decodeObjectForKey:@"avatar"];
+self.radarArray = [decoder decodeObjectForKey:@"radar"];
+}
+return self;
+}
+
+```
+
+存储到本地：
+// 账号的存储路径
+#define CKAccountPath [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject] stringByAppendingPathComponent:@"account.archive"]
+存储account对象到本地（编码）
+[NSKeyedArchiver archiveRootObject:account toFile:CKAccountPath];
+
+从本地取出（反编码）
+CKAccount *account = [NSKeyedUnarchiver unarchiveObjectWithFile:CKAccountPath];
