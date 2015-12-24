@@ -1,23 +1,25 @@
 # method
 文字记录笔记
 
-1、插入到数组的最前面
-
+###1、插入到数组的最前面
+```pytho
 NSRange range = NSMakeRange(0, newArray.count);
 NSIndexSet *set = [NSIndexSet indexSetWithIndexesInRange:range];
 [array insertObjects:newArray atIndexes:set];
-
-2、添加pch文件
+```
+###2、添加pch文件
+```python
 $(SRCROOT)/pch/pchFile.pch
-
-3、启动mysql
+```
+###3、启动mysql
+```python
 localhost:~ user$ alias mysql=/usr/local/mysql/bin/mysql
 
 localhost:~ user$ alias mysqladmin=/usr/local/mysql/bin/mysqladmin
 
 localhost:~ user$ mysql -u root -p
-
-4、配置openfire服务器的数据库操作：
+```
+###4、配置openfire服务器的数据库操作：
 第一次安装mysql成功之后
 
 点击Start MySQL Server按钮，启动mysql
@@ -25,36 +27,56 @@ localhost:~ user$ mysql -u root -p
 二、打开终端，定义mysql别名
 
 输入alias命令
-
+```python
 alias mysql=/usr/local/mysql/bin/mysql
+```
 回车，再输入
-
+```python
 alias mysqladmin=/usr/local/mysql/bin/mysqladmin
+```
 三、设置mysql root帐号的密码
-
+```python
 mysqladmin -u root password 初始密码
+```
 2.如果设置完密码后，需要修改，执行命令
-
+```python
 mysqladmin -u root -p  password 最新密码
+```
 接着会提示输入密码，此时输入旧密码，回车
 
 四、连接数据库
-
+```python
 mysql -u root -p
+```
 然后提示输入密码，输入三中设置的初始密码
 
-进入文件编辑：sudo vi 文件名
-
-创建数据库：create database openfire
-
-保存数据库修改：\u openfire
-现实所有的数据库：show databases
-
-删除数据库：drop database openfire;
-
-5、使用cocoaPod
-一、找到文件，输入vim Podfile；
+进入文件编辑：
+```python
+sudo vi 文件名
+```
+创建数据库：
+```python
+create database openfire
+```
+保存数据库修改：
+```python
+\u openfire
+```
+现实所有的数据库：
+```python
+show databases
+```
+删除数据库：
+```python
+drop database openfire;
+```
+###5、使用cocoaPod
+一、找到文件，输入
+```python
+vim Podfile；
+```
 二、开始输入i  然后输入
+```python
 platform :ios, '7.0'
 pod 'XMPPFramework', '~> 3.6.5'（例子）
 然后开始下载输入：
@@ -66,8 +88,9 @@ pod install –verbose –no-repo-update
 pod update –verbose –no-repo-update
 
 pod install --verbose --no-repo-update
-
-6、设置行间距、字间距
+```
+###6、设置行间距、字间距
+```python
 //设置字间距
 UniChar characterSpacing = 3;
 
@@ -94,9 +117,9 @@ self.AttributedStringperson = attributedString;
 
 然后计算整个文字所占的位置大小：
 CGSize contentSize = [person.AttributedStringperson boundingRectWithSize:CGSizeMake(maxW, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading context:nil].size;
-
-7、关于block的用法
-
+```
+###7、关于block的用法
+```python
 How Do I Declare A Block in Objective-C?
 
 1、As a local variable:
@@ -119,9 +142,10 @@ This site is not intended to be an exhaustive list of all possible uses of block
 If you find yourself needing syntax not listed here, it is likely that a typedef would make your code more readable.
 
 Unable to access this site due to the profanity in the URL? http://goshdarnblocksyntax.com is a more work-friendly mirror.
-
+```
 
 8、设置tableview中个人信息页面分框之间的缝隙
+```python
 - (nullable UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
 {
 UITableViewHeaderFooterView *view = [tableView dequeueReusableHeaderFooterViewWithIdentifier:@"FotterView"];
@@ -139,8 +163,11 @@ tableView.tableFooterView.backgroundColor = [UIColor redColor];
 return 20.0f;
 }
 第一组数据为空，作为顶部的空得部分
+```
 
-9、NSDictionary *infoDictionary = [[NSBundle mainBundle] infoDictionary];
+###9、
+```python
+NSDictionary *infoDictionary = [[NSBundle mainBundle] infoDictionary];
 CFShow(infoDictionary);
 // app名称
 NSString *app_Name = [infoDictionary objectForKey:@"CFBundleDisplayName"];
@@ -148,28 +175,33 @@ NSString *app_Name = [infoDictionary objectForKey:@"CFBundleDisplayName"];
 NSString *app_Version = [infoDictionary objectForKey:@"CFBundleShortVersionString"];
 // app build版本
 NSString *app_build = [infoDictionary objectForKey:@"CFBundleVersion"];
-
-10、在iOS 7中，苹果引入了一个新的属性，叫做[UIViewController setEdgesForExtendedLayout:]，它的默认值为UIRectEdgeAll。当你的容器是navigation controller时，默认的布局将从navigation bar的顶部开始。这就是为什么所有的UI元素都往上漂移了44pt。
+```
+###10、在iOS 7中，苹果引入了一个新的属性，叫做[UIViewController setEdgesForExtendedLayout:]，它的默认值为UIRectEdgeAll。当你的容器是navigation controller时，默认的布局将从navigation bar的顶部开始。这就是为什么所有的UI元素都往上漂移了44pt。
 修复这个问题的快速方法就是在方法- (void)viewDidLoad中添加如下一行代码：
 1
+```python
 self.edgesForExtendedLayout = UIRectEdgeNone;
-
+```
 解决tableview在iOS7和iOS之上的frame的设置问题
 
 
-11、iPhone图片拉伸的方法：
+###11、iPhone图片拉伸的方法：
+```python
 - (UIImage *)stretchableImageWithLeftCapWidth:(NSInteger)leftCapWidth topCapHeight:
+```
 它的功能是创建一个内容可拉伸，而边角不拉伸的图片，需要两个参数，第一个是左边不拉伸区域的宽度，第二个参数是上面不拉伸的高度。
 根据设置的宽度和高度，将接下来的一个像素进行左右扩展和上下拉伸。
 注意：可拉伸的范围都是距离leftCapWidth后的1竖排像素，和距离topCapHeight后的1横排像素。
 参数的意义是，如果参数指定10，5。那么，图片左边10个像素，上边5个像素。不会被拉伸，x坐标为11和一个像素会被横向复制，y坐标为6的一个像素会被纵向复制。
 注意：只是对一个像素进行复制到一定宽度。而图像后面的剩余像素也不会被拉伸。
+```python
 - (UIImage *)resizableImageWithCapInsets:(UIEdgeInsets)capInsets resizingMode:(UIImageResizingMode)resizingMode NS_AVAILABLE_IOS(6_0);
+```
 UIEdgeInsetsMake(28, 20, 15, 20)
 表示从距离左边28 上面20 右边15 下面20 进行拉伸
 其中Insets这个参数的格式是(top,left,bottom,right)，从上、左、下、右分别在图片上画了一道线，这样就给一个图片加了一个框。只有在框里面的部分才会被拉伸，而框外面的部分则不会改变。比如(20,5,10,5)，意思是下图矩形里面的部分可以被拉伸，而其余部分不变。
 
-12、NSCoping 编码 数据存储到本地 
+###12、NSCoping 编码 数据存储到本地 
 ```python
 #import <Foundation/Foundation.h>
 
@@ -247,7 +279,7 @@ return self;
 }
 
 ```
-
+```python
 存储到本地：
 // 账号的存储路径
 #define CKAccountPath [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject] stringByAppendingPathComponent:@"account.archive"]
@@ -256,3 +288,46 @@ return self;
 
 从本地取出（反编码）
 CKAccount *account = [NSKeyedUnarchiver unarchiveObjectWithFile:CKAccountPath];
+```
+
+###13 点击cell的图片 图片从cell的位置开始全屏显示
+
+#关键在于 oldframe=[avatarImageView convertRect:avatarImageView.bounds toView:window]; 
+其他的就是UIView的动画来回显示
+
+```python
++(void)showImage:(UIImageView *)avatarImageView{
+UIImage *image=avatarImageView.image;
+UIWindow *window=[UIApplication sharedApplication].keyWindow;
+UIView *backgroundView=[[UIView alloc]initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height)];
+oldframe=[avatarImageView convertRect:avatarImageView.bounds toView:window];
+backgroundView.backgroundColor=[UIColor blackColor];
+backgroundView.alpha=0;
+UIImageView *imageView=[[UIImageView alloc]initWithFrame:oldframe];
+imageView.image=image;
+imageView.tag=1;
+[backgroundView addSubview:imageView];
+[window addSubview:backgroundView];
+
+UITapGestureRecognizer *tap=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(hideImage:)];
+[backgroundView addGestureRecognizer: tap];
+
+[UIView animateWithDuration:0.3 animations:^{
+imageView.frame=CGRectMake(0,([UIScreen mainScreen].bounds.size.height-image.size.height*[UIScreen mainScreen].bounds.size.width/image.size.width)/2, [UIScreen mainScreen].bounds.size.width, image.size.height*[UIScreen mainScreen].bounds.size.width/image.size.width);
+backgroundView.alpha=1;
+} completion:^(BOOL finished) {
+
+}];
+}
+
++(void)hideImage:(UITapGestureRecognizer*)tap{
+UIView *backgroundView=tap.view;
+UIImageView *imageView=(UIImageView*)[tap.view viewWithTag:1];
+[UIView animateWithDuration:0.3 animations:^{
+imageView.frame=oldframe;
+backgroundView.alpha=0;
+} completion:^(BOOL finished) {
+[backgroundView removeFromSuperview];
+}];
+}
+```
